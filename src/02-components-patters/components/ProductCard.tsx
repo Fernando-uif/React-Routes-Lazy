@@ -1,11 +1,14 @@
-import styles from "../styles/styles.module.css";
+import { ReactElement } from "react";
+
+import { Product } from "../interfaces/Product";
+import { useProduct } from "../hooks/useProduct";
 import image from "../public/coffee-mug.png";
 import noImage from "../assets/no-image.jpg";
-import { useProduct } from "../hooks/useProduct";
-import { Product } from "../interfaces/Product";
+import styles from "../styles/styles.module.css";
 
 interface Props {
   product: Product;
+  children?: ReactElement | ReactElement[];
 }
 
 export const ProductImage = ({ img = false }) => {
@@ -26,7 +29,7 @@ export const ProductsButtons = ({
   increaseBy,
 }: {
   counter: number;
-  increaseBy: (arg:number) => void;
+  increaseBy: (arg: number) => void;
 }) => {
   return (
     <div className={styles.buttonsContainer}>
@@ -41,16 +44,18 @@ export const ProductsButtons = ({
   );
 };
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ children, product }: Props) => {
   const { counter, increaseBy } = useProduct();
 
   return (
     <>
       <div className={styles.productCard}>
-        <ProductImage img={product.img} />
-        <ProductTitle title={product.title} />
-        <ProductsButtons counter={counter} increaseBy={increaseBy} />
+        { children }
       </div>
     </>
   );
 };
+
+// ProductCard.Buttons = ProductsButtons;
+// ProductCard.Img = ProductImage;
+// ProductCard.Title = ProductTitle;

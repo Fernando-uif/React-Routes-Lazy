@@ -1,5 +1,4 @@
-import React from "react";
-import { ProductCard } from "../components/ProductCard";
+import { ProductCard, ProductImage, ProductsButtons, ProductTitle } from "../components/ProductCard";
 import { Product } from "../interfaces/Product";
 const product: Product = {
   id: "1",
@@ -19,7 +18,13 @@ export const ShoppingPage = () => {
             flexWrap: "wrap",
           }}
         >
-          <ProductCard product={product} />
+          <ProductCard product={product}>
+              <ProductImage/>
+              <ProductTitle title="hola"/>
+              <ProductsButtons counter={0} increaseBy={function (arg: number): void {
+              throw new Error("Function not implemented.");
+            } }/>
+          </ProductCard>
         </div>
       </div>
     </>
