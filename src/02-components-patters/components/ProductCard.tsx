@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { createContext, ReactElement, useContext } from "react";
 
 import { Product } from "../interfaces/Product";
 import { useProduct } from "../hooks/useProduct";
@@ -11,26 +11,36 @@ interface Props {
   children?: ReactElement | ReactElement[];
 }
 
-export const ProductImage = ({ img = false }) => {
+interface ProductContextProps {
+  counter: number;
+  increaseBy: (arg: number) => void;
+  product: Product;
+}
+
+const ProductContext = createContext({} as ProductContextProps);
+
+export const ProductImage = () => {
+  const { product } = useContext(ProductContext);
   return (
     <img
       className={styles.productImg}
-      src={img ? image : noImage}
+      src={product.img ? image : noImage}
       alt="coffemug"
     />
   );
 };
-export const ProductTitle = ({ title }: { title: string }) => {
-  return <span className={styles.productDescription}>{title}</span>;
+export const ProductTitle = ({ title }: { title?: string }) => {
+  const { product } = useContext(ProductContext);
+  console.log(title, "Tenemos el title");
+  return (
+    <span className={styles.productDescription}>
+      {title ? title : product.title}
+    </span>
+  );
 };
 
-export const ProductsButtons = ({
-  counter,
-  increaseBy,
-}: {
-  counter: number;
-  increaseBy: (arg: number) => void;
-}) => {
+export const ProductsButtons = () => {
+  const { increaseBy, counter } = useContext(ProductContext);
   return (
     <div className={styles.buttonsContainer}>
       <button onClick={() => increaseBy(-1)} className={styles.buttonMinus}>
@@ -49,9 +59,17 @@ export const ProductCard = ({ children, product }: Props) => {
 
   return (
     <>
-      <div className={styles.productCard}>
-        { children }
-      </div>
+      <ProductContext.Provider
+        value={{
+          counter,
+          increaseBy,
+          product,
+        }}
+      >
+        <div className={styles.productCard}>
+          {children}
+        </div>
+      </ProductContext.Provider>
     </>
   );
 };
