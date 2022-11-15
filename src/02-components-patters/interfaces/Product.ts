@@ -7,6 +7,7 @@ export interface Product {
 export interface Props {
   product: Product;
   children?: ReactElement | ReactElement[];
+  className?:string;
 }
 export interface ProductContextProps {
   counter: number;

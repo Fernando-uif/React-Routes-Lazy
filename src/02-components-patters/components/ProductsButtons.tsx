@@ -4,10 +4,10 @@ import { ProductContext } from "../context/ProductContext";
 
 import styles from "../styles/styles.module.css";
 
-export const ProductsButtons = () => {
+export const ProductsButtons = ({ className }: {className?:string}) => {
   const { increaseBy, counter } = useContext(ProductContext);
   return (
-    <div className={styles.buttonsContainer}>
+    <div className={`${styles.buttonsContainer} ${className}`}>
       <button onClick={() => increaseBy(-1)} className={styles.buttonMinus}>
         -
       </button>
