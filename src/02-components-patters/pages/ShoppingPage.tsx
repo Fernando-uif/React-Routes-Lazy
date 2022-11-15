@@ -1,9 +1,10 @@
 import {
-  ProductCard,
   ProductImage,
+  ProductCard,
   ProductsButtons,
   ProductTitle,
-} from "../components/ProductCard";
+} from "../components";
+
 import { Product } from "../interfaces/Product";
 const product: Product = {
   id: "1",
