@@ -33,7 +33,7 @@ export const ShoppingPage = () => {
           </ProductCard>
 
           <ProductCard product={product}>
-            <ProductImage style={{borderRadius:"10px"}} />
+            <ProductImage style={{ borderRadius: "10px" }} />
             <ProductTitle title="hola" />
             <ProductsButtons />
           </ProductCard>
