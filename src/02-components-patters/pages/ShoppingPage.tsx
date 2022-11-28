@@ -7,13 +7,37 @@ import {
 
 import { Product } from "../interfaces/Product";
 import "../styles/custom-style.css";
+import { useState } from "react";
 
 const product: Product = {
   id: "1",
   title: "Coffe mub- card",
-  img: false,
+  img: "02-components-patters/assets/coffee-mug.png",
 };
+const product2: Product = {
+  id: "1",
+  title: "Coffe mub - meme",
+  img: "02-components-patters/assets/coffee-mug2.png",
+};
+
+const products: Product[] = [product, product2];
+
+interface ProductIntCart extends Product {
+  count: number;
+}
+
 export const ShoppingPage = () => {
+  const [shoppingCart, setShoppingCart] = useState<{
+    [key: string]: ProductIntCart;
+  }>({
+    "1": { ...product, count: 2 },
+    "2": { ...product2, count: 2 },
+  });
+
+  const onProductCountChange = () => {
+    console.log("ON product change");
+  };
+
   return (
     <>
       <div>
@@ -26,16 +50,26 @@ export const ShoppingPage = () => {
             flexWrap: "wrap",
           }}
         >
-          <ProductCard className="bg-color container" product={product}>
+          {products.map((product) => {
+            return (
+              <ProductCard
+                key={product.id}
+                className="bg-color container"
+                product={product}
+                onChange={onProductCountChange}
+              >
+                <ProductImage className="imageContainer" />
+                <ProductTitle title={product.title} className="textColor" />
+                <ProductsButtons className={"buttons"} />
+              </ProductCard>
+            );
+          })}
+        </div>
+        <div className="shopping-cart">
+          <ProductCard className="bg-color container" product={product2}>
             <ProductImage className="imageContainer" />
-            <ProductTitle title="hola" className="textColor" />
+            <ProductTitle title={product2.title} className="textColor" />
             <ProductsButtons className={"buttons"} />
-          </ProductCard>
-
-          <ProductCard product={product}>
-            <ProductImage style={{ borderRadius: "10px" }} />
-            <ProductTitle title="hola" />
-            <ProductsButtons />
           </ProductCard>
         </div>
       </div>

@@ -2,17 +2,23 @@
   background-color: rgb(56 56 56);
 }
 
-.textColor{
-  color:#fff;
+.textColor {
+  color: #fff;
 }
-.imageContainer{
+.imageContainer {
   border-radius: 5px;
 }
-.container{
-  padding:1rem;
+.container {
+  padding: 1rem;
 }
 
-.buttons button, .buttons div{
-  color:#fff;
+.buttons button,
+.buttons div {
+  color: #fff;
   border-color: #fff;
+}
+.shopping-cart {
+  position: fixed;
+  right: 10px;
+  top: 0px;
 }
