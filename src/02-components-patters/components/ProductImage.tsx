@@ -14,7 +14,6 @@ export const ProductImage = ({
   style?: React.CSSProperties;
 }) => {
   const { product } = useContext(ProductContext);
-  console.log(product.img,'Tenemos el producto que dontiene product.imb');
   return (
     <img
       className={`${styles.productImg} ${className}`}
