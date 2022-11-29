@@ -12,7 +12,6 @@ export const ProductTitle = ({
   className?: string;
 }) => {
   const { product } = useContext(ProductContext);
-  console.log(title, "Tenemos el title");
   return (
     <span className={`${styles.productDescription} ${className}`}>
       {title ? title : product.title}

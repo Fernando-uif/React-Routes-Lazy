@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   ProductImage,
   ProductCard,
@@ -7,7 +9,6 @@ import {
 
 import { Product } from "../interfaces/Product";
 import "../styles/custom-style.css";
-import { useState } from "react";
 
 const product: Product = {
   id: "1",
@@ -50,13 +51,13 @@ export const ShoppingPage = () => {
             flexWrap: "wrap",
           }}
         >
-          {products.map((product) => {
+          {products.map((product, i) => {
             return (
               <ProductCard
-                key={product.id}
+                key={i}
                 className="bg-color container"
                 product={product}
-                onChange={onProductCountChange}
+                onChange={() => onProductCountChange()}
               >
                 <ProductImage className="imageContainer" />
                 <ProductTitle title={product.title} className="textColor" />
