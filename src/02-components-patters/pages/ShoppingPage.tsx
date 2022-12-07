@@ -16,7 +16,7 @@ const product: Product = {
   img: "02-components-patters/assets/coffee-mug.png",
 };
 const product2: Product = {
-  id: "1",
+  id: "2",
   title: "Coffe mub - meme",
   img: "02-components-patters/assets/coffee-mug2.png",
 };
@@ -30,13 +30,31 @@ interface ProductIntCart extends Product {
 export const ShoppingPage = () => {
   const [shoppingCart, setShoppingCart] = useState<{
     [key: string]: ProductIntCart;
-  }>({
-    "1": { ...product, count: 2 },
-    "2": { ...product2, count: 2 },
-  });
+  }>({});
 
-  const onProductCountChange = () => {
-    console.log("ON product change");
+  const onProductCountChange = ({
+    count,
+    product,
+  }: {
+    count: number;
+    product: Product;
+  }) => {
+    
+    if(count === 0){
+      const  newShoppingCart  = {...shoppingCart};
+      delete newShoppingCart[product.id];
+      setShoppingCart(newShoppingCart);
+      return;
+    }
+    setShoppingCart((oldShoppingCart) => {
+      return {
+        ...oldShoppingCart,
+        [product.id]: {
+          ...product,
+          count,
+        },
+      };
+    });
   };
 
   return (
@@ -57,10 +75,10 @@ export const ShoppingPage = () => {
                 key={i}
                 className="bg-color container"
                 product={product}
-                onChange={() => onProductCountChange()}
+                onChange={onProductCountChange}
               >
                 <ProductImage className="imageContainer" />
-                <ProductTitle title={product.title} className="textColor" />
+                <ProductTitle title={"product.title"} className="textColor" />
                 <ProductsButtons className={"buttons"} />
               </ProductCard>
             );
@@ -73,6 +91,9 @@ export const ShoppingPage = () => {
             <ProductsButtons className={"buttons"} />
           </ProductCard>
         </div>
+        <code>
+          <pre>{JSON.stringify(shoppingCart, null, 2)}</pre>
+        </code>
       </div>
     </>
   );

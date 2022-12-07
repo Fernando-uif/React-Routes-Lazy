@@ -1,4 +1,3 @@
-import { createContext, ReactElement, useContext } from "react";
 
 import { Props as ProductCardProps } from "../interfaces/Product";
 import { useProduct } from "../hooks/useProduct";
@@ -10,9 +9,9 @@ export const ProductCard = ({
   children,
   product,
   className,
-  onChange
+  onChange,
 }: ProductCardProps) => {
-  const { counter, increaseBy } = useProduct(onChange);
+  const { counter, increaseBy } = useProduct({ onChange, product });
 
   return (
     <>

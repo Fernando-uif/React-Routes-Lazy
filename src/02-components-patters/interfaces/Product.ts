@@ -8,7 +8,7 @@ export interface Props {
   product: Product;
   children?: ReactElement | ReactElement[];
   className?: string;
-  onChange?: () => void;
+  onChange?:  (arg: onChangeArgs) => void;
 }
 export interface ProductContextProps {
   counter: number;
